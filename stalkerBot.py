@@ -20,7 +20,7 @@ class StalkerBot(BotPlugin):
     @botcmd
     def seen(self, mess, args):
         """ find out when someone last said something """
-        username = get_username_from_message_with_chatrooms(mess)
+        username = get_jid_from_message(mess)
         if (username == args):
             return 'I can see you now'
         try:
