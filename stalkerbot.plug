@@ -1,0 +1,6 @@
+[Core]
+Name = StalkerBot
+Module = stalkerBot
+
+[Documentation]
+Description = Where is this guy ?
