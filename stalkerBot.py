@@ -24,7 +24,7 @@ class StalkerBot(BotPlugin):
         if (username == args):
             return 'I can see you now'
         try:
-            last_seen = self.shelf[args]
+            last_seen = self.shelf[str(args)]
             return 'I last saw %s %s ago (on %s)' % (args, format_timedelta(datetime.now() - last_seen), datetime.strftime(last_seen, '%A, %b %d at %H:%M'))
         except KeyError:
             return 'I have no record of %s' % args
