@@ -1,7 +1,7 @@
 from botplugin import BotPlugin
 
 from jabberbot import botcmd
-from utils import get_jid_from_message
+from utils import get_jid_from_message,format_timedelta
 from datetime import datetime
 import os
 import re
