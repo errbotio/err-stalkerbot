@@ -1,10 +1,8 @@
-from botplugin import BotPlugin
+from errbot.botplugin import BotPlugin
 
-from jabberbot import botcmd
-from utils import get_jid_from_message,format_timedelta
+from errbot.jabberbot import botcmd
+from errbot.utils import get_jid_from_message,format_timedelta
 from datetime import datetime
-import os
-import re
 
 class StalkerBot(BotPlugin):
     def callback_message(self, conn, mess):
@@ -21,7 +19,7 @@ class StalkerBot(BotPlugin):
     def seen(self, mess, args):
         """ find out when someone last said something """
         username = get_jid_from_message(mess)
-        if (username == args):
+        if username == args:
             return 'I can see you now'
         try:
             last_seen = self.shelf[str(args)]
