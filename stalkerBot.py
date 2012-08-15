@@ -1,8 +1,15 @@
-from errbot.botplugin import BotPlugin
-
-from errbot.jabberbot import botcmd
 from errbot.utils import get_jid_from_message,format_timedelta
 from datetime import datetime
+
+# Backward compatibility
+from errbot.version import VERSION
+from errbot.utils import version2array
+if version2array(VERSION) >= [1,6,0]:
+    from errbot import botcmd, BotPlugin
+else:
+    from errbot.botplugin import BotPlugin
+    from errbot.jabberbot import botcmd
+
 
 class StalkerBot(BotPlugin):
     def callback_message(self, conn, mess):
