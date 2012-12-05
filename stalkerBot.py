@@ -17,7 +17,7 @@ class StalkerBot(BotPlugin):
         if not message:
             return
 
-        username = get_jid_from_message(mess)
+        username = str(get_jid_from_message(mess)).encode('ascii', 'replace')
         self.shelf[username] = datetime.now()
         self.shelf.sync()
 
