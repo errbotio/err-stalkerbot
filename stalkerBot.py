@@ -12,17 +12,33 @@ class StalkerBot(BotPlugin):
 
         username = mess.frm.node
         log.debug("Recording presence of %s", username)
-        self[username] = datetime.now()
+        self[username] = {
+            'time': datetime.now(),
+            'msg': message,
+        }
 
     @botcmd
     def seen(self, mess, args):
         """ find out when someone last said something """
-        username = mess.frm.node
-        if username == args:
+        requester = mess.frm.node
+        username = str(args)
+
+        log.debug('{0} looking for {1}'.format(requester, username))
+
+        if username == requester:
             return 'I can see you now'
+
+        if username == '':
+            return 'Hmm... seen whom?'
+
         try:
-            last_seen = self[str(args)]
-            return 'I last saw %s %s ago (on %s)' % (args, format_timedelta(datetime.now() - last_seen), datetime.strftime(last_seen, '%A, %b %d at %H:%M'))
+            last_seen = self[username]['time']
+            last_msg = self[username]['msg']
+            return 'I last saw {0} {1} ago (on {2}) which said "{3}"'.format(
+                username,
+                format_timedelta(datetime.now() - last_seen),
+                datetime.strftime(last_seen, '%A, %b %d at %H:%M'),
+                last_msg
+            )
         except KeyError:
             return 'I have no record of %s' % args
-
