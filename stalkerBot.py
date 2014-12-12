@@ -20,7 +20,7 @@ class StalkerBot(BotPlugin):
         if not message or username == 'None':
             return
 
-        logging.info('Saving entry for {0}'.format(username))
+        logging.debug('Saving entry for {0}'.format(username))
 
         self.shelf[username] = {
             'time': datetime.now(),
@@ -34,7 +34,7 @@ class StalkerBot(BotPlugin):
         requester = str(mess.nick)
         username = str(args)
 
-        logging.info('{0} looking for {1}'.format(requester, username))
+        logging.debug('{0} looking for {1}'.format(requester, username))
 
         if username == '':
             return 'Hmm... seen whom?'
