@@ -12,6 +12,7 @@ class StalkerBot(BotPlugin):
 
         username = mess.frm.node
         log.debug("Recording presence of %s", username)
+
         self[username] = {
             'time': datetime.now(),
             'msg': message,
