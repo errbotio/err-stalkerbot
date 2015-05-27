@@ -1,4 +1,4 @@
-err-stalkerbot a bot that tell you teh last time he saw somebody
+err-stalkerbot a bot that tell you the ast time it saw somebody
 ================================================================
 
 For more information about err you can find it here: https://github.com/gbin/err
