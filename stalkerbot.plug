@@ -2,6 +2,9 @@
 Name = StalkerBot
 Module = stalkerBot
 
+[Python]
+Version=2+
+
 [Documentation]
 Description = Where is this guy ?
 
