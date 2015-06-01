@@ -6,7 +6,7 @@ log = logging.getLogger(__name__)
 
 class StalkerBot(BotPlugin):
     def callback_message(self, mess):
-        message = mess.getBody()
+        message = mess.body
         if not message:
             return
 
