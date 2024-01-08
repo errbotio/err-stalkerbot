@@ -35,11 +35,8 @@ class StalkerBot(BotPlugin):
         try:
             last_seen = self[username]["time"]
             last_msg = self[username]["msg"]
-            return 'I last saw {0} {1} ago (on {2}) which said "{3}"'.format(
-                username,
-                format_timedelta(datetime.now() - last_seen),
-                datetime.strftime(last_seen, "%A, %b %d at %H:%M"),
-                last_msg,
-            )
+            time_ago_relative = format_timedelta(datetime.now() - last_seen)
+            time_ago = datetime.strftime(last_seen, "%A, %b %d at %H:%M")
+            return f"I last saw '{username}' {time_ago_relative} ago (on {time_ago}) which said '{last_msg}'"
         except KeyError:
-            return "I have no record of %s" % args
+            return f"I have no record of {args}."
