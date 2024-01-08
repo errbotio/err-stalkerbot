@@ -6,4 +6,4 @@ Module = stalkerBot
 Description = Where is this guy ?
 
 [Python]
-Version = 2+
+Version = 3
