@@ -5,12 +5,12 @@ from errbot.utils import format_timedelta
 
 
 class StalkerBot(BotPlugin):
-    def callback_message(self, mess):
-        message = mess.body
+    def callback_message(self, msg):
+        message = msg.body
         if not message:
             return
 
-        username = mess.frm.node
+        username = msg.frm.nick
         self.log.debug("Recording presence of %s", username)
 
         self[username] = {
@@ -19,9 +19,9 @@ class StalkerBot(BotPlugin):
         }
 
     @botcmd
-    def seen(self, mess, args):
+    def seen(self, msg, args):
         """find out when someone last said something"""
-        requester = mess.frm.node
+        requester = msg.frm
         username = str(args)
 
         self.log.debug("%s looking for %s" % (requester, username))
