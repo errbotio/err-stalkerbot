@@ -1,10 +1,7 @@
-import logging
 from datetime import datetime
 
 from errbot import BotPlugin, botcmd
 from errbot.utils import format_timedelta
-
-log = logging.getLogger(__name__)
 
 
 class StalkerBot(BotPlugin):
@@ -14,7 +11,7 @@ class StalkerBot(BotPlugin):
             return
 
         username = mess.frm.node
-        log.debug("Recording presence of %s", username)
+        self.log.debug("Recording presence of %s", username)
 
         self[username] = {
             "time": datetime.now(),
@@ -27,7 +24,7 @@ class StalkerBot(BotPlugin):
         requester = mess.frm.node
         username = str(args)
 
-        log.debug("{0} looking for {1}".format(requester, username))
+        self.log.debug("%s looking for %s" % (requester, username))
 
         if username == requester:
             return "I can see you now"
