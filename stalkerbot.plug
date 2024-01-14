@@ -3,7 +3,7 @@ Name = StalkerBot
 Module = stalkerBot
 
 [Documentation]
-Description = Where is this guy ?
+Description = Where is this person?
 
 [Python]
-Version = 2+
+Version = 3

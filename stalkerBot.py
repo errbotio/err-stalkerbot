@@ -1,45 +1,42 @@
-from errbot.utils import format_timedelta
 from datetime import datetime
-from errbot import botcmd, BotPlugin
-import logging
-log = logging.getLogger(__name__)
+
+from errbot import BotPlugin, botcmd
+from errbot.utils import format_timedelta
+
 
 class StalkerBot(BotPlugin):
-    def callback_message(self, mess):
-        message = mess.body
+    def callback_message(self, msg):
+        message = msg.body
         if not message:
             return
 
-        username = mess.frm.node
-        log.debug("Recording presence of %s", username)
+        username = msg.frm.nick
+        self.log.debug("Recording presence of %s", username)
 
         self[username] = {
-            'time': datetime.now(),
-            'msg': message,
+            "time": datetime.now(),
+            "msg": message,
         }
 
     @botcmd
-    def seen(self, mess, args):
-        """ find out when someone last said something """
-        requester = mess.frm.node
+    def seen(self, msg, args):
+        """find out when someone last said something"""
+        requester = msg.frm
         username = str(args)
 
-        log.debug('{0} looking for {1}'.format(requester, username))
+        self.log.debug("%s looking for %s" % (requester, username))
 
         if username == requester:
-            return 'I can see you now'
+            return "I can see you now"
 
-        if username == '':
-            return 'Hmm... seen whom?'
+        if username == "":
+            return "Hmm... seen whom?"
 
         try:
-            last_seen = self[username]['time']
-            last_msg = self[username]['msg']
-            return 'I last saw {0} {1} ago (on {2}) which said "{3}"'.format(
-                username,
-                format_timedelta(datetime.now() - last_seen),
-                datetime.strftime(last_seen, '%A, %b %d at %H:%M'),
-                last_msg
-            )
+            last_seen = self[username]["time"]
+            last_msg = self[username]["msg"]
+            time_ago_relative = format_timedelta(datetime.now() - last_seen)
+            time_ago = datetime.strftime(last_seen, "%A, %b %d at %H:%M")
+            return f"I last saw '{username}' {time_ago_relative} ago (on {time_ago}) which said '{last_msg}'"
         except KeyError:
-            return 'I have no record of %s' % args
+            return f"I have no record of {args}."
